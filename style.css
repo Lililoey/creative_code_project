@@ -5,3 +5,17 @@ canvas{
     top: 0;
     z-index: -1;
 }
+
+h1{
+    position: absolute; /* 使用绝对定位 */
+    top: 200px; /* 距离页面顶部50像素 */
+    left: 100px; /* 距离页面左边100像素 */
+    color:white;
+    font-family: "Times New Roman", serif;
+    font-size: 600%;
+    text-shadow: 
+    -1px -1px 0 #000,  
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
+}
