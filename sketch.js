@@ -2,7 +2,7 @@ let message = "This is not an error"; // 初始显示的消息
 let alternativeMessage = "Move your mouse to explore more"; // 鼠标按下后显示的消息
 let showAlternativeMessage = false; // 控制显示哪个消息的标志
 let positions = []; // 存储鼠标位置的数组
-let maxPositions = 200; // 存储的最大位置数
+let maxPositions = 100; // 存储的最大位置数
 
 function setup() {
     createCanvas(windowWidth, windowHeight); // 创建一个全屏画布
