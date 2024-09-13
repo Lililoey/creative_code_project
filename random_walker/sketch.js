@@ -59,3 +59,7 @@ function draw() {
   strokeWeight(10); // 调整当前点的大小
   point(x, y, z);
 }
+
+function windowResized(){
+  resizeCanvas(windowWidth, windowHeight);
+}

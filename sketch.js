@@ -44,3 +44,4 @@ function mousePressed() {
 function mouseReleased() {
     showAlternativeMessage = false; // 释放鼠标时恢复到初始状态
 }
+
