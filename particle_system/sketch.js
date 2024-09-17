@@ -1,8 +1,5 @@
 let fireworks = [];
 let zoom = 500;
-let angleX = 0;  // 控制X轴的旋转角度
-let angleY = 0;  // 控制Y轴的旋转角度
-let previousMouseX, previousMouseY;  // 记录上一帧鼠标位置
 
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
@@ -11,9 +8,6 @@ function setup() {
   stroke(255);
   strokeWeight(4);
   background(0);
-  
-  previousMouseX = mouseX;
-  previousMouseY = mouseY;
 }
 
 function draw() {
@@ -22,10 +16,6 @@ function draw() {
   
   // 控制视角放大和缩小
   translate(0, 0, zoom);
-  
-  // 应用鼠标控制的旋转
-  rotateX(angleX);
-  rotateY(angleY);
 
   // 增加烟花生成的概率，使场景更丰富，但减少烟花的生成量
   if (random(1) < 0.05) {  // 概率减小，减少生成的烟花数量
@@ -43,20 +33,6 @@ function draw() {
 
 function mouseWheel(event) {
   zoom += event.delta;  // 通过鼠标滚轮来控制放大和缩小
-}
-
-function mouseDragged() {
-  // 计算鼠标拖动的距离
-  let deltaX = mouseX - previousMouseX;
-  let deltaY = mouseY - previousMouseY;
-  
-  // 根据鼠标的拖动改变旋转角度
-  angleY += deltaX * 0.01;  // 鼠标水平拖动控制Y轴旋转
-  angleX += deltaY * 0.01;  // 鼠标垂直拖动控制X轴旋转
-
-  // 更新上一帧的鼠标位置
-  previousMouseX = mouseX;
-  previousMouseY = mouseY;
 }
 
 class Firework {
@@ -181,4 +157,8 @@ class Particle {
     point(0, 0, 0);
     pop();
   }
+}
+
+function windowResized(){
+  resizeCanvas(windowWidth, windowHeight);
 }
