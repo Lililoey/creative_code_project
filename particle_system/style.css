@@ -10,7 +10,7 @@ h1{
     position: absolute; /* 使用绝对定位 */
     top: 120px; /* 距离页面顶部50像素 */
     left: 60px; /* 距离页面左边100像素 */
-    right: 900px;
+    right: 700px;
     color:white;
     font-family: 'Raleway', sans-serif;
     font-size: 50%;
