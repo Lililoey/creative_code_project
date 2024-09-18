@@ -1,9 +1,9 @@
 let fireworks = [];
-let zoom = 500;  // 初始时设置一个较远的视角
+let zoom = 400;  // 初始时设置一个较远的视角
 
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
-  frameRate(30);  // 降低帧率以提高流畅度
+  frameRate(20);  // 降低帧率以提高流畅度
   colorMode(HSB);
   stroke(255);
   strokeWeight(4);
@@ -21,7 +21,7 @@ function draw() {
   camera(camX, camY, camZ, 0, 0, 0, 0, 1, 0);  // 设置摄像机朝向场景中心
 
   // 增加烟花生成的概率，使场景更丰富，但减少烟花的生成量
-  if (random(1) < 0.05) {  // 概率减小，减少生成的烟花数量
+  if (random(1) < 0.08) {  // 概率减小，减少生成的烟花数量
     fireworks.push(new Firework());
   }
 
