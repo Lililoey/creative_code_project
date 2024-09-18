@@ -1,5 +1,5 @@
 let fireworks = [];
-let zoom = 500;
+let zoom = 500;  // 初始时设置一个较远的视角
 
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
@@ -12,10 +12,13 @@ function setup() {
 
 function draw() {
   // 半透明背景用于制造拖尾效果
-  background(0, 0, 0, 50);  // 提高背景透明度，使尾迹清除更快
-  
-  // 控制视角放大和缩小
-  translate(0, 0, zoom);
+  background(0, 0, 0, 50);
+
+  // 控制摄像机位置，使用 zoom 来调整摄像机的 z 轴距离
+  let camX = 0;
+  let camY = 0;
+  let camZ = zoom;  // 使用 zoom 变量控制 z 轴
+  camera(camX, camY, camZ, 0, 0, 0, 0, 1, 0);  // 设置摄像机朝向场景中心
 
   // 增加烟花生成的概率，使场景更丰富，但减少烟花的生成量
   if (random(1) < 0.05) {  // 概率减小，减少生成的烟花数量
@@ -32,7 +35,8 @@ function draw() {
 }
 
 function mouseWheel(event) {
-  zoom += event.delta;  // 通过鼠标滚轮来控制放大和缩小
+  // 滚动鼠标放大和缩小场景，通过改变 zoom 来调整摄像机距离
+  zoom += event.delta;
 }
 
 class Firework {
@@ -162,4 +166,3 @@ class Particle {
 function windowResized(){
   resizeCanvas(windowWidth, windowHeight);
 }
-
