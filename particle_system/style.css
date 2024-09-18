@@ -8,10 +8,12 @@ canvas{
 
 h1{
     position: absolute; /* 使用绝对定位 */
-    top: 200px; /* 距离页面顶部50像素 */
-    left: 100px; /* 距离页面左边100像素 */
+    top: 120px; /* 距离页面顶部50像素 */
+    left: 60px; /* 距离页面左边100像素 */
+    right: 510px;
     color:white;
-    font-family: "Times New Roman", serif;
-    font-size: 100%;
+    font-family: 'Raleway', sans-serif;
+    font-size: 20%;
+    opacity: 0.8;
 
 }
