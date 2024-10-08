@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
@@ -19,11 +19,29 @@
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
       crossorigin="anonymous"></script>
 
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>The Book of Answer</title>
+
     <!-- sketch additions -->
 
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
+    <div id="initial-screen">
+      <h1>The Book of Answers</h1>
+      <h2>When you're at a loss, the Book of Answers will give you the answers.</h2>
+      <div id="question-container">
+        <input type="text" id="question" placeholder="Type your question" autofocus>
+        <span>?</span>
+      </div>
+    </div>
+  
+    <div id="answer-screen" style="display:none;">
+      <!-- 这里会显示交互字体效果 -->
+      <div id="canvas-container"></div>
+    </div>
+  
 
     <!-- main -->
     <script src="sketch.js"></script>

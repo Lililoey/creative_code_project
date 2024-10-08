@@ -1,9 +1,52 @@
-html, body {
-    padding: 0;
-    margin: 0;
-  }
-  
-  canvas {
-    vertical-align: top;
-  }
-  
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #c3cdc4;
+  font-family: 'Arial', sans-serif;
+}
+
+#initial-screen h1 {
+  position: absolute;
+  top: 80px;  /* 标题距离页面顶部 20px */
+  left: 50%;
+  transform: translateX(-50%);  /* 水平居中 */
+  font-size: 3rem;
+  color: rgb(14, 23, 0);
+}
+
+h2 {
+  position: absolute;
+  top: 170px;  /* 标题距离页面顶部 80px */
+  left: 50%;
+  transform: translateX(-50%);  /* 水平居中 */
+  font-size: 1rem;
+  color: rgb(14, 23, 0);
+}
+
+#question-container {
+  margin-top: 220px;
+  font-size: 2.2rem;
+}
+
+#question {
+  font-size: 1.8rem;
+  border: none;
+  border-bottom: 2px solid rgb(14, 23, 0);
+  background: none;
+  outline: none;
+  width: 400px;
+  text-align: center;
+}
+
+#answer-screen {
+  text-align: center;
+}
+
+canvas {
+  display: block;
+}
