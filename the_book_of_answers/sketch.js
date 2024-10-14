@@ -52,6 +52,12 @@ function setup() {
   }); // // 当字体加载完成时会调用这个回调函数callback function （只有到了相应条件才会响应的函数）
 }
 
+function getPathBoundingBox(path) {
+  // 初始边界值，设置为无穷大和无穷小
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+
+
+
 function draw() {
   background(255);
   //noStroke();
@@ -78,6 +84,11 @@ function draw() {
     // 这行代码对路径进行重新采样，将路径按固定长度（6 像素）等距地分割成若干个点，以便在这些点上绘制图像
     path = g.resampleByLength(path, 6);
 
+  
+    
+    // 使用路径的宽度来居中
+    translate((width / 2) - (pathWidth / 2), height / 2);
+
     // 固定直径为20
     var diameter = 20;
 
@@ -87,7 +98,7 @@ function draw() {
     // ------ svg module1 ------
     //console.log(path.commands.length)
     push()
-    translate((width / 2) - (textWidthValue / 2), height / 2);  
+    //translate((width / 2) - (textWidthValue / 2), height / 2);  
     for (var i = 0; i < path.commands.length - 1; i++) {
       // 遍历 path.commands 中的所有点（除最后一个），并逐个处理相邻的两个点。
       var pnt = path.commands[i];
@@ -167,4 +178,4 @@ function keyReleased() {
 function windowResized(){
   resizeCanvas(windowWidth, windowHeight);
 }
-
+}
