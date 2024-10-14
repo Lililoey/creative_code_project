@@ -194,10 +194,10 @@ document.getElementById('try-again-button').addEventListener('click', function()
   
   
 
-//function keyReleased() {
+function keyReleased() {
     // 导出 PNG
-    //if (keyCode == CONTROL) saveCanvas(gd.timestamp(), 'png');
-  //}
+    if (keyCode == CONTROL) saveCanvas(gd.timestamp(), 'png');
+  }
 
 function windowResized(){
   resizeCanvas(windowWidth, windowHeight);
