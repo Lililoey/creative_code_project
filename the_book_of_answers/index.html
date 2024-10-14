@@ -19,18 +19,22 @@
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
       crossorigin="anonymous"></script>
 
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>The Book of Answer</title>
-
-    <!-- sketch additions -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Book of Answer</title>
 
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
     <div id="initial-screen">
-      <h1>The Book of Answers</h1>
-      <h2>When you're at a loss, the Book of Answers will give you the answers.</h2>
+      <!-- 使用 PNG 图片替代标题和副标题 -->
+      <img src="data/The_Book_of_Answers.png" alt="The Book of Answers" class="title-image">
+      <img src="data/description.png" alt="Description" class="subtitle-image">
+
+      <!-- 在副标题和输入框之间插入 apple.png -->
+      <img src="data/apple.png" alt="Apple" class="apple-img">
+
+      <!-- 问题输入框，保留下划线和问号 -->
       <div id="question-container">
         <input type="text" id="question" placeholder="Type your question" autofocus>
         <span>?</span>
@@ -40,10 +44,10 @@
     <div id="answer-screen" style="display:none;">
       <!-- 这里会显示交互字体效果 -->
       <div id="canvas-container"></div>
+      <button id="try-again-button">Try Again</button>
     </div>
   
-
     <!-- main -->
-    <script src="sketch1.js"></script>
+    <script src="sketch2.js"></script>
   </body>
 </html>

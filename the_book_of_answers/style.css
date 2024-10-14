@@ -6,46 +6,83 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #c3cdc4;
   font-family: 'Arial', sans-serif;
 }
 
-#initial-screen h1 {
+.title-image {
   position: absolute;
-  top: 80px;  /* 标题距离页面顶部 20px */
+  top: 122px; /* 标题图片距离页面顶部的距离 */
   left: 50%;
-  transform: translateX(-50%);  /* 水平居中 */
-  font-size: 3rem;
-  color: rgb(14, 23, 0);
+  transform: translateX(-50%); /* 水平居中 */
+  max-width: 40%; /* 控制标题图片的宽度 */
 }
 
-h2 {
+.subtitle-image {
   position: absolute;
-  top: 170px;  /* 标题距离页面顶部 80px */
+  top: 207px; /* 副标题图片距离页面顶部的距离 */
   left: 50%;
-  transform: translateX(-50%);  /* 水平居中 */
-  font-size: 1rem;
-  color: rgb(14, 23, 0);
+  transform: translateX(-50%); /* 水平居中 */
+  max-width: 35%; /* 控制副标题图片的宽度 */
+}
+
+.apple-img {
+  position: absolute;
+  top: 290px; /* 设置 apple.png 图片的位置 */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px; /* 根据需要调整 apple.png 的大小 */
 }
 
 #question-container {
-  margin-top: 220px;
-  font-size: 2.2rem;
+  margin-top: 460px;
+  font-size: 2.0rem;
+  color: #1f4e7a;
+  text-align: center;
 }
 
 #question {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   border: none;
-  border-bottom: 2px solid rgb(14, 23, 0);
+  border-bottom: 2px solid #1f4e7a;; /* 保持下划线 */
   background: none;
   outline: none;
   width: 400px;
   text-align: center;
 }
 
+#initial-screen {
+  background-color: #cde7ff; /* 设置背景颜色为 #cde7ff */
+  width: 100vw; /* 全屏宽度 */
+  height: 100vh; /* 全屏高度 */
+  position: relative; /* 保证内部元素的绝对定位相对于这个容器 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
 #answer-screen {
   text-align: center;
+  
 }
+
+#try-again-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  background-color: #1f4e7a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#try-again-button:hover {
+  background-color: #133c5a; /* 按钮悬停时的颜色 */
+}
+
+
 
 canvas {
   display: block;
