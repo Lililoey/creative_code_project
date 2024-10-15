@@ -65,12 +65,19 @@ body {
 }
 
 
+/* 确保 #answer-screen 页面中的内容在垂直和水平方向居中 */
 #answer-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* 使用全屏高度 */
   text-align: center;
-  
+  background-color: #f8f9fa; /* 可选，设置背景色 */
 }
 
-
+/* 画布设置为 block 显示，并与页面居中 */
 canvas {
   display: block;
+  margin: auto;
 }
+

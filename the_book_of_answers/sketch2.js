@@ -8,9 +8,9 @@ var rotationSpeed = 0.05; // 固定的旋转速度
 let answers = [
   "Focus on the moment",
   "Asking advice from others",
-  "It doesn't matter.",
+  "It doesn't matter",
   "Always think twice",
-  "Stay focused.",
+  "Stay focused",
   "Trying different paths",
   "Take time to reflect and find the answers within",
   "Trust your original thought",
@@ -77,44 +77,53 @@ function getPathBoundingBox(path) {
 
 // 固定字体大小并根据屏幕宽度换行，考虑左右边距
 function draw() {
-  background(255);
+  background(255);  // 白色背景
   imageMode(CENTER);
-  
-  let fontSize = 140; // 固定字体大小
-  let lineHeight = fontSize * 1.2; // 行高
-  let yPos = height / 4; // 初始 y 位置，保证文字可以居中
-  let margin = 40; // 左右边距
-  
+
+  let fontSize = 140;  // 固定字体大小
+  let lineHeight = fontSize * 1.2;  // 行高
+  let margin = 40;  // 左右边距
+  let maxWidth = width - margin * 2;  // 最大可用宽度，去掉左右边距
+
+  // 计算文本的总高度，以便居中
+  let numLines = Math.ceil(textTyped.length / (maxWidth / fontSize));  // 估算总行数
+  let totalTextHeight = numLines * lineHeight;  // 总文本高度
+  let yPos = (height - totalTextHeight / 4) / 2;  // 垂直居中起始位置
+
   if (textTyped.length > 0 && font != undefined) {
-    let currentLine = ''; // 当前行的文字
-    let lineWidth = 0; // 当前行的宽度
-    let spaceWidth = font.getAdvanceWidth(' ', fontSize); // 空格的宽度
-    let maxWidth = width - margin * 2; // 最大可用宽度，去掉左右边距
+    // 按单词分割文本
+    let words = textTyped.split(' ');
+    let currentLine = '';  // 当前行的文字
+    let lineWidth = 0;  // 当前行的宽度
+    let spaceWidth = font.getAdvanceWidth(' ', fontSize);  // 空格的宽度
 
-    for (let char of textTyped) {
-      // 计算每个字符的宽度
-      let charWidth = font.getAdvanceWidth(char, fontSize);
+    for (let word of words) {
+      let wordWidth = font.getAdvanceWidth(word, fontSize);  // 计算单词的宽度
 
-      if (lineWidth + charWidth < maxWidth) { // 在允许范围内，添加字符
-        currentLine += char;
-        lineWidth += charWidth;
+      if (lineWidth + wordWidth + spaceWidth < maxWidth) {
+        // 如果当前行可以放下该单词，则添加到当前行
+        currentLine += word + ' ';
+        lineWidth += wordWidth + spaceWidth;
       } else {
-        renderLine(currentLine, fontSize, yPos, margin, maxWidth); // 渲染当前行
-        yPos += lineHeight; // 移动到下一行
-        currentLine = char; // 当前字符放到新的一行
-        lineWidth = charWidth;
+        // 当前行放不下该单词，则渲染当前行并换行
+        renderLine(currentLine.trim(), fontSize, yPos, margin, maxWidth);  // 渲染当前行
+        yPos += lineHeight;  // 移动到下一行
+        currentLine = word + ' ';  // 当前单词放到新的一行
+        lineWidth = wordWidth + spaceWidth;
       }
     }
 
     // 渲染最后一行
     if (currentLine.length > 0) {
-      renderLine(currentLine, fontSize, yPos, margin, maxWidth);
+      renderLine(currentLine.trim(), fontSize, yPos, margin, maxWidth);
     }
 
     // 更新旋转角度，限制角度在 0 到 TWO_PI 之间
     rotationAngle = (rotationAngle + rotationSpeed) % TWO_PI;
   }
 }
+
+
 
 // 渲染一行文字，考虑左右边距
 function renderLine(line, fontSize, yPos, margin, maxWidth) {
