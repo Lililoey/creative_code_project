@@ -47,6 +47,9 @@ function setup() {
       font = f;
     }
   });
+
+  // 初始绑定：在 question 页面按 Enter 跳转到 answer 页面
+  bindQuestionPage();
 }
 
 // 手动计算路径的边界框
@@ -164,40 +167,67 @@ function renderLine(line, fontSize, yPos, margin, maxWidth) {
   pop();
 }
 
-// 监听输入框按键事件
-document.getElementById('question').addEventListener('keypress', function(event) {
+// 用命名函数处理 question 页面行为
+function handleQuestionPageEnter(event) {
   if (event.key === 'Enter') {
     let userInput = document.getElementById('question').value;
-
     if (userInput.trim() !== "") {
+      // 切换到答案页面
       document.getElementById('initial-screen').style.display = 'none';
       document.getElementById('answer-screen').style.display = 'block';
-      
+
       let randomAnswerIndex = Math.floor(Math.random() * answers.length);
       let randomAnswer = answers[randomAnswerIndex];
       textTyped = randomAnswer;
+
+      // 解绑 question 页面的 Enter 事件并绑定 answer 页面的事件
+      unbindQuestionPage();
+      bindAnswerPage();
     }
   }
-});
+}
 
-document.getElementById('try-again-button').addEventListener('click', function() {
+// 用命名函数处理 answer 页面行为
+function handleAnswerPageEnter(event) {
+  if (event.key === 'Enter') {
     // 隐藏答案界面，显示问题输入界面
     document.getElementById('answer-screen').style.display = 'none';
     document.getElementById('initial-screen').style.display = 'block';
   
     // 清空输入框内容
     document.getElementById('question').value = '';
-  
-    // 保持原有布局，确保位置不变
     textTyped = ''; // 清除上一次的答案
-  });
-  
-  
+
+    // 解绑 answer 页面的 Enter 事件并绑定 question 页面的事件
+    unbindAnswerPage();
+    bindQuestionPage();
+  }
+}
+
+// 绑定 question 页面按 Enter 键行为
+function bindQuestionPage() {
+  document.addEventListener('keypress', handleQuestionPageEnter);
+}
+
+// 解绑 question 页面的按键事件
+function unbindQuestionPage() {
+  document.removeEventListener('keypress', handleQuestionPageEnter);
+}
+
+// 绑定 answer 页面按 Enter 键行为
+function bindAnswerPage() {
+  document.addEventListener('keypress', handleAnswerPageEnter);
+}
+
+// 解绑 answer 页面的按键事件
+function unbindAnswerPage() {
+  document.removeEventListener('keypress', handleAnswerPageEnter);
+}
 
 function keyReleased() {
-    // 导出 PNG
-    if (keyCode == CONTROL) saveCanvas(gd.timestamp(), 'png');
-  }
+  // 导出 PNG
+  if (keyCode == CONTROL) saveCanvas(gd.timestamp(), 'png');
+}
 
 function windowResized(){
   resizeCanvas(windowWidth, windowHeight);
