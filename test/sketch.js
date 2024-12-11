@@ -1,88 +1,116 @@
 let emojiCategories = {
-  外貌: ['😀', '🤖', '👩', '🧑', '👨'],
-  性格: ['😂', '😡', '🥺', '😎', '🤔'],
-  职业: ['👨‍💻', '🧑‍🍳', '👩‍🚀', '🧑‍🔬', '👨‍🎤'],
-  故乡: ['🏔️', '🏝️', '🏙️', '🏜️', '🌋']
+  外貌: ['🐶', '🐱', '🐻', '🦊', '🐰', '🐨', '🐻‍❄️', '🐼', '🐣', '🐧', '🦄', '🦞', '🦐', '🪼', '🦑', '🐳', '🐋', '🐠', '🐢', '🦋', '🦉', '👩', '🧑', '👨', '🧑‍🦲', '👩‍🦱', '🧑‍🦱', '👨‍🦱','🤖'],
+  性格: ['😀', '🤣', '😋', '😛', '🤩', '🫠', '🫥', '😴', '🤤', '🫣', '😶‍🌫️', '🤯', '😡', '🥵', '🥹', '🥰', '😍', '🥳', '🤓', '🤪'],
+  职业: ['🧑‍🎨', '🧑‍🚀', '👩‍✈️', '🧑‍🔬', '👩🏻‍💻', '🧑‍🏫', '👩‍🌾', '👩‍⚕️', '🕵️‍♀️', '💂', '👮', '👷‍♀️', '👮', '🧙‍♀️', '🎅', '🧜‍♀️', '🧝‍♀️', '🧛', '🔮', '📿', '💈', '🩰', '🎨', '🎻', '🎤', '🎺', '🎸', '🎳', '⚽️', '🎣', '🎵'],
+  故乡: ['🗽', '🗼', '🌋', '🏜️', '🏝️', '🏖️', '⛰️', '🏔️', '⛩️', '🎠', '⛲️', '🎢', '🖼️', '🏕️', '🏟️', '🏯']
 };
+
 
 let steps = ["外貌", "性格", "职业", "故乡"];
 let currentStep = 0;
 let results = {};
-let showEmoji = false; // 控制页面切换
-let currentEmoji; // 当前生成的 emoji
-let fontSize = 8; // ASCII 字母大小
-let asciiDensity = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; // 字母密度
-let frameCounter = 0; // 帧计数器
-let frameInterval = 8; // ASCII 变化间隔
+let showEmoji = false;
+let currentEmoji;
+let fontSize = 8;
+let asciiDensity = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+let frameCounter = 0;
+let frameInterval = 8;
 
-document.getElementById("startBtn").addEventListener("click", nextStep);
+// Keyboard event listener
+document.addEventListener("keydown", handleKey);
+
+function handleKey(event) {
+  if (event.key === "Enter" || event.key.toLowerCase() === "w") {
+    nextStep();
+  } else if (event.key.toLowerCase() === "s") {
+    prevStep();
+  }
+}
 
 function nextStep() {
+  if (currentStep >= steps.length) {
+    displayResult();
+    return;
+  }
+
   if (!showEmoji) {
-    // 显示“生成成功”页面
-    let step = steps[currentStep];
+    // Show image corresponding to the current step
+    let stepImages = ["images/1.png", "images/2.png", "images/3.png", "images/4.png"];
     document.getElementById("content").innerHTML = `
-      <h1>你的${step}生成成功！</h1>
-      <button id="viewBtn">查看</button>
+      <img id="stepImage" src="${stepImages[currentStep]}" alt="Step ${currentStep + 1}" />
     `;
-    document.getElementById("viewBtn").addEventListener("click", () => {
-      showEmoji = true;
-      nextStep();
-    });
+    showEmoji = true;
   } else {
-    // 显示 ASCII 风格 emoji 页面
+    // Show ASCII emoji generation
     let step = steps[currentStep];
     currentEmoji = random(emojiCategories[step]);
     results[step] = currentEmoji;
 
     document.getElementById("content").innerHTML = `
-      <div id="canvasContainer">
-        <canvas id="emojiCanvas"></canvas>
-      </div>
-      <button id="nextBtn">下一步</button>
+      <div id="canvasContainer"></div>
     `;
     let canvas = createCanvas(windowWidth, windowHeight);
     canvas.parent("canvasContainer");
+    canvas.style("display", "block");
+    canvas.style("margin", "0 auto");
+    canvas.style("position", "absolute");
+    canvas.style("top", "50%");
+    canvas.style("left", "50%");
+    canvas.style("transform", "translate(-50%, -50%)");
+    resizeCanvas(windowWidth, windowHeight);
 
-    document.getElementById("nextBtn").addEventListener("click", () => {
-      showEmoji = false;
-      currentStep++;
-      if (currentStep < steps.length) {
-        nextStep();
-      } else {
-        displayResult();
-      }
-    });
+    showEmoji = false;
+    currentStep++;
+  }
+}
+
+function prevStep() {
+  if (currentStep > 0) {
+    currentStep--;
+    showEmoji = false;
+    nextStep();
   }
 }
 
 function displayResult() {
+  document.body.style.backgroundColor = "#e6ffe5";
   document.getElementById("content").innerHTML = `
-    <h1>你的虚拟身份生成完成！</h1>
-    <p>外貌：${results["外貌"]}</p>
-    <p>性格：${results["性格"]}</p>
-    <p>职业：${results["职业"]}</p>
-    <p>故乡：${results["故乡"]}</p>
-    <button id="restartBtn">重新生成</button>
+    <h1>Your virtual identity is complete!</h1>
+    <p>Appearance: ${results["外貌"]}</p>
+    <p>Personality: ${results["性格"]}</p>
+    <p>Occupation: ${results["职业"]}</p>
+    <p>Hometown: ${results["故乡"]}</p>
+    <p>Press Enter or W to restart!</p>
   `;
-  document.getElementById("restartBtn").addEventListener("click", () => location.reload());
+
+  document.addEventListener("keydown", restartToHome, { once: true });
+}
+
+function restartToHome(event) {
+  if (event.key === "Enter" || event.key.toLowerCase() === "w") {
+    document.body.style.backgroundColor = "#e6ffe5";
+    document.getElementById("content").innerHTML = `
+      <img id="headerImage" src="images/title.png" alt="欢迎图片" />
+      <img id="descriptionImage" src="images/description.png" alt="描述图片" />
+    `;
+    currentStep = 0;
+    results = {};
+  }
 }
 
 function draw() {
   if (!currentEmoji) return;
 
-  background(255); // 白色背景
+  background(255); // 白色背景确保没有绿色显示
   textSize(fontSize);
   textFont("monospace");
   textAlign(CENTER, CENTER);
 
-  // ASCII 动态变化
   if (frameCounter % frameInterval === 0) {
     asciiDensity = shuffle(asciiDensity.split("")).join("");
   }
   frameCounter++;
 
-  // 创建 ASCII 图像
   let img = createGraphics(120, 120);
   img.pixelDensity(1);
   img.textSize(100);

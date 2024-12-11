@@ -16,40 +16,19 @@ main {
   text-align: center;
 }
 
-#headerImage {
-  position: absolute;
-  top: -50%; /* 调整距离顶部的位置 */
-  left: 50%;
-  transform: translateX(-50%);
-  max-width: 800%; /* 放大图片 */
+img {
+  display: block;
+  margin: 20px auto;
+  max-width: 80%; /* 确保图片适应屏幕 */
   height: auto;
+}
+
+#headerImage {
+  margin-bottom: 10px; /* Adjust spacing between images */
 }
 
 #descriptionImage {
-  position: absolute;
-  top: 35%; /* 调整距离顶部的位置 */
-  left: 50%;
-  transform: translateX(-50%);
-  max-width: 600%; /* 放大图片 */
-  height: auto;
+  margin-top: 10px;
 }
 
-button {
-  position: absolute;
-  top: 120%; /* 调整按钮距离顶部的位置 */
-  left: 50%;
-  transform: translateX(-50%);
-  margin: 0;
-  padding: 1px 60px; /* 按钮内边距 */
-  font-size: 15px; /* 按钮字体大小 */
-  cursor: pointer;
-  background-color: #8dec8b; /* 按钮背景颜色 */
-  color: #083018; /* 按钮文字颜色 */
-  border: none;
-  border-radius: 10px; /* 按钮圆角 */
-  transition: background-color 0.3s; /* 鼠标悬停动画 */
-}
 
-button:hover {
-  background-color: #70c970; /* 鼠标悬停颜色 */
-}
