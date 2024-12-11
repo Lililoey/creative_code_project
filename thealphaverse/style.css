@@ -1,0 +1,34 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #e6ffe5; /* 全局背景颜色 */
+  height: 100vh; /* 确保全屏高度 */
+  display: flex;
+  justify-content: center; /* 左右居中 */
+  align-items: center; /* 上下居中 */
+}
+
+main {
+  position: relative;
+  width: 100%; /* 全屏宽度 */
+  max-width: 800px; /* 最大宽度 */
+  text-align: center;
+}
+
+img {
+  display: block;
+  margin: 20px auto;
+  max-width: 80%; /* 确保图片适应屏幕 */
+  height: auto;
+}
+
+#headerImage {
+  margin-bottom: 10px; /* Adjust spacing between images */
+}
+
+#descriptionImage {
+  margin-top: 10px;
+}
+
+
