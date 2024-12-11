@@ -2,29 +2,54 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  text-align: center;
-  background-color: #f9f9f9;
-}
-
-canvas {
-  display: block;
+  background-color: #e6ffe5; /* 全局背景颜色 */
+  height: 100vh; /* 确保全屏高度 */
+  display: flex;
+  justify-content: center; /* 左右居中 */
+  align-items: center; /* 上下居中 */
 }
 
 main {
-  padding: 20px;
+  position: relative;
+  width: 100%; /* 全屏宽度 */
+  max-width: 800px; /* 最大宽度 */
+  text-align: center;
+}
+
+#headerImage {
+  position: absolute;
+  top: -50%; /* 调整距离顶部的位置 */
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 800%; /* 放大图片 */
+  height: auto;
+}
+
+#descriptionImage {
+  position: absolute;
+  top: 35%; /* 调整距离顶部的位置 */
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 600%; /* 放大图片 */
+  height: auto;
 }
 
 button {
-  margin: 10px;
-  padding: 10px 20px;
-  font-size: 16px;
+  position: absolute;
+  top: 120%; /* 调整按钮距离顶部的位置 */
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 1px 60px; /* 按钮内边距 */
+  font-size: 15px; /* 按钮字体大小 */
   cursor: pointer;
-  background-color: #007BFF;
-  color: white;
+  background-color: #8dec8b; /* 按钮背景颜色 */
+  color: #083018; /* 按钮文字颜色 */
   border: none;
-  border-radius: 5px;
+  border-radius: 10px; /* 按钮圆角 */
+  transition: background-color 0.3s; /* 鼠标悬停动画 */
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #70c970; /* 鼠标悬停颜色 */
 }
