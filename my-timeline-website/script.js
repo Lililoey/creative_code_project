@@ -28,6 +28,9 @@ function setup() {
     let canvas = createCanvas(window.innerWidth * 0.9, 500);
     canvas.parent("canvas-container");
     
+    // Load saved timeline data if available
+    loadTimelineData();
+    
     let startX = 200;
     let startY = height / 2;
     let spacing = width / 5;
@@ -51,6 +54,37 @@ function setup() {
     // Ensure timeline is initially centered
     if (circles.length > 0) {
         offsetX = (width - (circles[circles.length-1].x - circles[0].x + 400)) / 2;
+    }
+}
+
+// Load saved timeline data from localStorage
+function loadTimelineData() {
+    const savedData = localStorage.getItem('academicTimeline');
+    if (savedData) {
+        try {
+            const parsedData = JSON.parse(savedData);
+            if (Array.isArray(parsedData) && parsedData.length > 0) {
+                timeline = parsedData;
+                console.log("Timeline data loaded from localStorage");
+            }
+        } catch (e) {
+            console.error("Error loading timeline data:", e);
+        }
+    }
+}
+
+// Save timeline data to localStorage
+function saveTimelineData() {
+    try {
+        // Update the timeline array with current circle data
+        for (let i = 0; i < circles.length; i++) {
+            timeline[i].events = circles[i].events;
+        }
+        
+        localStorage.setItem('academicTimeline', JSON.stringify(timeline));
+        console.log("Timeline data saved to localStorage");
+    } catch (e) {
+        console.error("Error saving timeline data:", e);
     }
 }
 
@@ -431,6 +465,9 @@ function mouseClicked() {
                 let newEvent = prompt(`Edit courses for ${c.semester}:`, eventsStr);
                 if (newEvent !== null) {
                     c.events = newEvent.split(",").map(e => e.trim()).filter(e => e.length > 0);
+                    
+                    // Save changes to localStorage
+                    saveTimelineData();
                 }
             }
         }
@@ -458,5 +495,13 @@ function windowResized() {
     // Re-center timeline
     if (circles.length > 0) {
         offsetX = (width - (circles[circles.length-1].x - circles[0].x + 400)) / 2;
+    }
+}
+
+// Clear all saved data (optional function)
+function clearSavedData() {
+    if (confirm("Are you sure you want to clear all saved timeline data?")) {
+        localStorage.removeItem('academicTimeline');
+        location.reload(); // Reload the page to reset to default timeline
     }
 }
