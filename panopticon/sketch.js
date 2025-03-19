@@ -72,7 +72,7 @@ function setup() {
   
   video = createCapture(VIDEO);
   video.size(640, 480);
-  //video.hide();
+  video.hide();
   
   videoGraphics = createGraphics(640, 480, P2D); // 在 P2D 画布中处理视频
 
